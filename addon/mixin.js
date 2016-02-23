@@ -72,10 +72,10 @@ var ArrayValidatorProxy = Ember.ArrayProxy.extend(setValidityMixin, {
   validate: function() {
     return this._validate();
   },
-  _validate: Ember.on('init', function() {
+  _validate: function() {
     var promises = get(this, 'content').invoke('_validate').without(undefined);
     return Ember.RSVP.all(promises);
-  }),
+  },
   validators: Ember.computed.alias('content')
 });
 
