@@ -161,8 +161,8 @@ export default Ember.Mixin.create(setValidityMixin, {
       return errors;
     });
   },
-  _validate: Ember.on('init', function() {
+  _validate: function() {
     var promises = this.validators.invoke('_validate').without(undefined);
     return Ember.RSVP.all(promises);
-  })
+  }
 });
