@@ -70,7 +70,7 @@ export default Ember.Object.extend({
   canValidate: function() {
     if(this.model instanceof DS.Model && this.model.relationshipFor(this.property)) {
       var initalizedRelationship = this.model._internalModel._relationships.initializedRelationships[this.property];
-      if(initalizedRelationship === undefined || initalizedRelationship.hasData === false) {
+      if(initalizedRelationship === undefined || initalizedRelationship.inverseRecord.currentState.isLoaded === false) {
         return false;
       }
     }
