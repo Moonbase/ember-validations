@@ -68,6 +68,10 @@ export default Ember.Object.extend({
     }
   },
   canValidate: function() {
+    if(this.model instanceof DS.Model && this.model.relationshipFor(this.property) && this.model._internalModel._relationships.initializedRelationships[this.property] === undefined) {
+      return false;
+    }
+    
     if (typeof(this.conditionals) === 'object') {
       if (this.conditionals['if']) {
         if (typeof(this.conditionals['if']) === 'function') {
