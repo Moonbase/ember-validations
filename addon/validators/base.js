@@ -68,8 +68,11 @@ export default Ember.Object.extend({
     }
   },
   canValidate: function() {
-    if(this.model instanceof DS.Model && this.model.relationshipFor(this.property) && this.model._internalModel._relationships.initializedRelationships[this.property] === undefined) {
-      return false;
+    if(this.model instanceof DS.Model && this.model.relationshipFor(this.property)) {
+      var initalizedRelationship = this.model._internalModel._relationships.initializedRelationships[this.property];
+      if(initalizedRelationship === undefined || initalizedRelationship.hasLoaded === false)
+        return false;
+      }
     }
     
     if (typeof(this.conditionals) === 'object') {
